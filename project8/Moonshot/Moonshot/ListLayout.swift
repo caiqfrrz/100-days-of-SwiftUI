@@ -14,9 +14,8 @@ struct ListLayout: View {
     var body: some View {
         List {
             ForEach(missions){ mission in
-                NavigationLink {
-                    MissionView(mission: mission, astronauts: astronauts)
-                } label: {
+                NavigationLink(value: mission) {
+                    //MissionView(mission: mission, astronauts: astronauts)
                     VStack(alignment: .leading) {
                         
                         HStack {
@@ -46,6 +45,9 @@ struct ListLayout: View {
         .listRowSeparator(.visible)
         .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
         .background(.darkBackground)
+        .navigationDestination(for: Mission.self) { selected in
+            MissionView(mission: selected, astronauts: astronauts)
+        }
     }
 }
 

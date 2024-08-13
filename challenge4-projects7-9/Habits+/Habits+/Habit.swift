@@ -7,10 +7,18 @@
 
 import Foundation
 
-struct Habit: Identifiable, Codable {
+struct Habit: Identifiable, Codable, Equatable {
     var id = UUID()
     let name: String
     let description: String
+    
+    var count: Int = 0 {
+        didSet {
+            if count < 0 {
+                count = 0
+            }
+        }
+    }
 }
 
 @Observable
@@ -35,7 +43,27 @@ class UserHabits {
         habits = []
     }
     
+    func addHabit(habit: Habit) {
+        habits.append(habit)
+    }
+    
     func removeHabit(at offset: IndexSet) {
         habits.remove(atOffsets: offset)
+    }
+    
+    func getHabit(id: UUID) -> Habit {
+        guard let index = habits.firstIndex(where: {$0.id == id}) else { return Habit(name: "", description: "") }
+        
+        return habits[index]
+    }
+    
+    func update(habit: Habit) {
+        guard let index = getIndex(habit: habit) else { return }
+        
+        habits[index] = habit
+    }
+    
+    func getIndex(habit: Habit) -> Int? {
+        habits.firstIndex(where: {$0.id == habit.id})
     }
 }

@@ -16,24 +16,26 @@ struct NewHabit: View {
     @State private var description: String = "Description"
     
     var body: some View {
-        Form {
-            TextField("Description", text: $description)
-        }
-        .navigationTitle($name)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button("Save") {
-                    let habit = Habit(name: name, description: description)
-                    
-                    habits.habits.append(habit)
-                    dismiss()
-                }
+        NavigationStack {
+            Form {
+                TextField("Description", text: $description, axis: .vertical)
             }
-            ToolbarItem(placement: .topBarLeading) {
-                Button("Cancel", role: .cancel) {
-                    dismiss()
+            .navigationTitle($name)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Save") {
+                        let item = Habit(name: name, description: description)
+                        
+                        habits.addHabit(habit: item)
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel", role: .cancel) {
+                        dismiss()
+                    }
                 }
             }
         }

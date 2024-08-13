@@ -14,6 +14,7 @@
 		D4A93F5F2C6AD9180023FEB4 /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93F5E2C6AD9180023FEB4 /* Habit.swift */; };
 		D4A93F612C6ADBBC0023FEB4 /* HabitsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93F602C6ADBBC0023FEB4 /* HabitsList.swift */; };
 		D4A93F632C6AE5870023FEB4 /* NewHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93F622C6AE5870023FEB4 /* NewHabit.swift */; };
+		D4A93F652C6BA8210023FEB4 /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A93F642C6BA8210023FEB4 /* HabitView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		D4A93F5E2C6AD9180023FEB4 /* Habit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit.swift; sourceTree = "<group>"; };
 		D4A93F602C6ADBBC0023FEB4 /* HabitsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsList.swift; sourceTree = "<group>"; };
 		D4A93F622C6AE5870023FEB4 /* NewHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabit.swift; sourceTree = "<group>"; };
+		D4A93F642C6BA8210023FEB4 /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				D4A93F602C6ADBBC0023FEB4 /* HabitsList.swift */,
 				D4A93F622C6AE5870023FEB4 /* NewHabit.swift */,
 				D4A93F5E2C6AD9180023FEB4 /* Habit.swift */,
+				D4A93F642C6BA8210023FEB4 /* HabitView.swift */,
 				D4A93F542C6AD7210023FEB4 /* Assets.xcassets */,
 				D4A93F562C6AD7210023FEB4 /* Preview Content */,
 			);
@@ -149,6 +152,7 @@
 				D4A93F5F2C6AD9180023FEB4 /* Habit.swift in Sources */,
 				D4A93F532C6AD71F0023FEB4 /* ContentView.swift in Sources */,
 				D4A93F612C6ADBBC0023FEB4 /* HabitsList.swift in Sources */,
+				D4A93F652C6BA8210023FEB4 /* HabitView.swift in Sources */,
 				D4A93F512C6AD71F0023FEB4 /* Habits_App.swift in Sources */,
 				D4A93F632C6AE5870023FEB4 /* NewHabit.swift in Sources */,
 			);

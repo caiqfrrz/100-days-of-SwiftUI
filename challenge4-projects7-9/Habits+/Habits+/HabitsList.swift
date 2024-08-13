@@ -8,37 +8,44 @@
 import SwiftUI
 
 struct HabitsList: View {
+    @State private var showingSheet = false
+    
     let habits: UserHabits
     
     var body: some View {
         List {
             ForEach(habits.habits) { item in
                 NavigationLink {
-                    Text("oii")
+                    HabitView(userHabits: habits, habitId: item.id)
                 } label: {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("\(item.name)")
                                 .fontWeight(.bold)
                             
+                            Text("Done \(item.count) times")
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
             }
             .onDelete(perform: habits.removeHabit)
         }
-        List {
-            NavigationLink {
-                NewHabit(habits: habits)
-            } label: {
-                VStack {
-                    Text("Add new habit!")
-                        .fontWeight(.bold)
-                }
+        Button {
+            showingSheet = true
+        } label: {
+            VStack {
+                Text("Add new habit!")
+                    .fontWeight(.bold)
+                    .foregroundStyle(.blue)
             }
+            .padding()
         }
-        
         .navigationTitle("Habits+")
+        .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showingSheet) {
+            NewHabit(habits: habits)
+        }
     }
 }
 

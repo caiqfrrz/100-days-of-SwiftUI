@@ -7,6 +7,51 @@
 
 import Foundation
 
+
+// challenge 3
+struct userInfo: Codable {
+    
+    var name = ""
+    var streetAddress = ""
+    var city = ""
+    var zip = ""
+    
+    var hasValidAddress: Bool {
+        if name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty {
+            return false
+        }
+        if name.isAllSpace || streetAddress.isAllSpace || city.isAllSpace || zip.isAllSpace {
+            return false
+        }
+        
+        return true
+    }
+    
+    init() {
+        if let savedInfo = UserDefaults.standard.data(forKey: "userInfo") {
+            if let decodedInfo = try? JSONDecoder().decode(userInfo.self, from: savedInfo) {
+                name = decodedInfo.name
+                streetAddress = decodedInfo.streetAddress
+                city = decodedInfo.city
+                zip = decodedInfo.zip
+                return
+            }
+        }
+        
+        name = ""
+        streetAddress = ""
+        city = ""
+        zip = ""
+    }
+    
+    func save() {
+        if let encoded = try? JSONEncoder().encode(self) {
+            UserDefaults.standard.set(encoded, forKey: "userInfo")
+        }
+    }
+    
+}
+
 @Observable
 class Order: Codable {
     enum CodingKeys: String, CodingKey {
@@ -15,10 +60,7 @@ class Order: Codable {
         case _specialRequestEnabled = "specialRequestEnabled"
         case _extraFrosting = "extraFrosting"
         case _addSprinkles = "addSprinkles"
-        case _name = "name"
-        case _streetAddress = "streetAddress"
-        case _city = "city"
-        case _zip = "zip"
+        case _user = "user"
     }
     
     static let types = ["Vanilla", "Strawberry", "Chocolate", "Rainbow"]
@@ -37,18 +79,6 @@ class Order: Codable {
     var extraFrosting = false
     var addSprinkles = false
     
-    var name = ""
-    var streetAddress = ""
-    var city = ""
-    var zip = ""
-    
-    var hasValidAddress: Bool {
-        if name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty {
-            return false
-        }
-        
-        return true
-    }
     
     var cost: Decimal {
         // 2$ per cake
@@ -68,5 +98,26 @@ class Order: Codable {
         }
         
         return cost
+    }
+    
+    // challenge 3
+    var user = userInfo() {
+        didSet {
+            user.save()
+        }
+    }
+
+}
+
+
+// challenge 1
+
+// this extension can only be used in this file (fileprivate)
+fileprivate extension String {
+    var isAllSpace: Bool {
+        // if the string is empty, return false
+        guard !self.isEmpty else { return false }
+        // self.drop(while: {$0 == " "}) creates a empty substring if the string is only empty spaces
+        return self.drop(while: {$0 == " "}).isEmpty
     }
 }
